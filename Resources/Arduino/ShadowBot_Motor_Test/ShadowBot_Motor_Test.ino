@@ -1,3 +1,16 @@
+/*
+ * ShadowBot Motor Test
+ * Test tool for the 4WD ShadowBot, a basic vehicle built with Arduino Uno and the ADA Fruit DCMotor Shield.
+ * The software controls 4 x 5V geared DC motors from the common 4WD motor chassis robotics kit.
+ * (https://www.jaycar.com.au/4-wheel-drive-motor-chassis-robotics-kit/p/KR3162)
+ * It uses the Adafruit Motor Shield Library to control the electronic driver board (shield).
+ * 
+ * Allows a user to control the motors via the Serial interface
+ * 8 = FORWARD
+ * 2 = BACKWARD
+ * 5 = STOP (CONTROLLED)
+ * 0 = HALT
+*/
 #include <AFMotor.h>
 
 AF_DCMotor motorFL(1);          // Front Left DC motor on M1
