@@ -19,7 +19,13 @@ AF_DCMotor motorBR(3);          // Front Left DC motor on M3
 AF_DCMotor motorBL(4);          // Front Left DC motor on M4
 
 // Set maximum operating speed
-const int maxSpeed = 150;
+const int minSpeed = 80;
+const int maxSpeed = 200;
+
+// Function declarations
+void speedUp(int arg=maxSpeed);
+void slowDown(int arg=minSpeed);
+
 
 void setup() {
   // Open the Serial port
@@ -64,19 +70,19 @@ void loop() {
     motorFR.run(FORWARD);
     motorBR.run(FORWARD);
     motorBL.run(FORWARD);
-    if('8' == p | '2' == p) decelerate();
-    accelerate();
+    if('8' == p | '2' == p) slowDown();
+    speedUp();
   }
   else if('2' == c){
     motorFL.run(BACKWARD);
     motorFR.run(BACKWARD);
     motorBR.run(BACKWARD);
     motorBL.run(BACKWARD);
-    if('8' == p | '2' == p) decelerate();
-    accelerate();
+    if('8' == p | '2' == p) slowDown();
+    speedUp();
   }
   else if('5' == c){
-    decelerate();
+    slowDown();
     halt();
   }
   else if('0' == c){
@@ -92,9 +98,13 @@ void loop() {
   p = c;
 }
 
-// Used to ramp things up
-void accelerate(){
-  for (int i = 0; i < maxSpeed; i++) {
+/*
+ * Function definitions
+*/
+
+// Used to ramp speed up
+void speedUp(int arg){
+  for (int i = 0; i < arg; i++) {
     motorFL.setSpeed(i);
     motorFR.setSpeed(i);
     motorBR.setSpeed(i);
@@ -103,9 +113,9 @@ void accelerate(){
   }
 }
 
-// Used to ramp things down
-void decelerate(){
-  for (int i = maxSpeed; i > 0; i--) {
+// Used to ramp speed down
+void slowDown(int arg){
+  for (int i = maxSpeed; i > arg; i--) {
     motorFL.setSpeed(i);
     motorFR.setSpeed(i);
     motorBL.setSpeed(i);
