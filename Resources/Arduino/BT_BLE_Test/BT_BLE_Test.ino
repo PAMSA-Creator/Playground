@@ -1,4 +1,5 @@
 #define SOFT_SERIAL
+#define _HM_10
 
 const int LED = 13;
 const int LED_ext = A0;
@@ -18,7 +19,7 @@ String msg;
 String str_ii = "";
 int ii_0 = 0;
 
-// Setup the connection with HM-10
+// Setup the connection with Bluetooth Module
 void setup()
 {
   Serial.begin(115200);
@@ -29,18 +30,35 @@ void setup()
   ble_device.begin(9600);
   delay(100);
 
-  ble_help();
-  delay(100);
+#if defined(_HC_05)
+//  ble_help();
+//  delay(100);
+#endif
 
   // Enter AT+ commands of interest here (BLE Address, UUIDs, Power settings)
-  ble_cmd("AT+NAME","Device Name: "); // printout device name
-  ble_cmd("AT+LADDR","Address: "); // printout BLE address
-  ble_cmd("AT+CHAR","Char UUID: "); // printout character UUID
-  ble_cmd("AT+VERSION","Version: "); // module version  
-  ble_cmd("AT+PIN","PIN code: "); // printout PIN code for pairing
-  ble_cmd("AT+RESET",""); // reset BLE module
+  // NOTE: This is different between HC-05, BT-05, HM-10, etc.
+  ble_cmd("AT","Connection check: "); // Connection check - returns OK if all good
+#if defined(_HC_05)
+  ble_cmd("AT+NAMEBLExAR","Device Name: "); // printout device name
+  ble_cmd("AT+LADDR","Address: ");          // printout BLE address
+  ble_cmd("AT+CHAR","Char UUID: ");         // printout character UUID
+  ble_cmd("AT+VERSION","Version: ");        // module version  
+//  ble_cmd("AT+RESET","");                   // reset BLE module
+#elif defined(_HM_10)
+  ble_cmd("AT+BAUD?","BAUD rate: ");    // printout BAUD rate
+  ble_cmd("AT+NAME?","Device Name: ");  // printout device name
+  ble_cmd("AT+ROLE?","Device Role: ");  // printout device role
+  ble_cmd("AT+ADDR?","Address: ");      // printout BLE address
+  ble_cmd("AT+CHAR?","Char UUID: ");    // printout character UUID
+  ble_cmd("AT+PASS?","Pass code: ");    // printout PIN code for pairing
+  ble_cmd("AT+IMME?","Work mode: ");    // printout Work mode
+  delay(1000);
+  ble_cmd("AT+DISC?","Scan for devices... ");    // printout Scan progress
+  delay(10000);
+//  ble_cmd("AT+RESET",""); // reset BLE module
+#endif
   
-  ble_device.println("Bluetooth connection is on");
+//  ble_device.println("Bluetooth connection is on");
   pinMode(LED, OUTPUT);
   Serial.println ("Ready to connect");
 }
@@ -81,7 +99,7 @@ String ble_cmd(String cmd_str,String desc_str){
 }
 
 void ble_help(){
-  ble_device.println("AT+HELP"); // list all AT+ commands
+  ble_device.println("AT+HELP?"); // list all AT+ commands
   delay(100);
 
   while (true){ // loop to print all AT+ commands
