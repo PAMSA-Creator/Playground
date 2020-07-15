@@ -52,10 +52,6 @@ void setup()
   ble_cmd("AT+CHAR?","Char UUID: ");    // printout character UUID
   ble_cmd("AT+PASS?","Pass code: ");    // printout PIN code for pairing
   ble_cmd("AT+IMME?","Work mode: ");    // printout Work mode
-  delay(1000);
-  ble_cmd("AT+DISC?","Scan for devices... ");    // printout Scan progress
-  delay(10000);
-//  ble_cmd("AT+RESET",""); // reset BLE module
 #endif
   
 //  ble_device.println("Bluetooth connection is on");
