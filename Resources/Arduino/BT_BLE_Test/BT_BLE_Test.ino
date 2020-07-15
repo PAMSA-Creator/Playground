@@ -99,7 +99,11 @@ String ble_cmd(String cmd_str,String desc_str){
 }
 
 void ble_help(){
-  ble_device.println("AT+HELP?"); // list all AT+ commands
+#if defined(_HC_05)
+  ble_device.println("AT+HELP");    // list all AT+ commands
+#elif defined(_HM_10)
+  ble_device.println("AT+HELP?");   // list all AT+ commands | NOTE this command doesn't work 9must change implementation)
+#endif
   delay(100);
 
   while (true){ // loop to print all AT+ commands
