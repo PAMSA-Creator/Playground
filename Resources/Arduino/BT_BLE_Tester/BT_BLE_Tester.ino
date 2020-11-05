@@ -25,7 +25,6 @@ void setup()
   Serial.begin(115200);
   delay(100);
   Serial.println ("Setup");
-
   
   ble_device.begin(9600);
   delay(100);
@@ -52,6 +51,10 @@ void setup()
   ble_cmd("AT+CHAR?","Char UUID: ");    // printout character UUID
   ble_cmd("AT+PASS?","Pass code: ");    // printout PIN code for pairing
   ble_cmd("AT+IMME?","Work mode: ");    // printout Work mode
+//  delay(1000);
+//  ble_cmd("AT+DISC?","Scan for devices... ");    // printout Scan progress
+//  delay(10000);
+//  ble_cmd("AT+RESET",""); // reset BLE module
 #endif
   
 //  ble_device.println("Bluetooth connection is on");
@@ -98,7 +101,7 @@ void ble_help(){
 #if defined(_HC_05)
   ble_device.println("AT+HELP");    // list all AT+ commands
 #elif defined(_HM_10)
-  ble_device.println("AT+HELP?");   // list all AT+ commands | NOTE this command doesn't work 9must change implementation)
+  ble_device.println("AT+HELP?");   // list all AT+ commands | NOTE this command doesn't work (must change implementation)
 #endif
   delay(100);
 
