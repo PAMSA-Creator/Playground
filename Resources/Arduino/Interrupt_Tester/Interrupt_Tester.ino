@@ -1,3 +1,7 @@
+/*
+ * Reference: https://thewanderingengineer.com/2014/08/11/arduino-pin-change-interrupts/
+ */
+
 #include <avr/sleep.h>
 
 volatile int count;
