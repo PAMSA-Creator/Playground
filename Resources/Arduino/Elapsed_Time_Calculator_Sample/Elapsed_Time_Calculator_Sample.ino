@@ -1,18 +1,25 @@
+/*
+ * Elapsed time calculator sample code
+ * The calculation of the elapsed time in this code takes into consideration the possibility of a wrap around.
+ * A wrap around occurs when the timer reaches the limit of its count and goes back to zero.
+ * At this moment the stop time will seem to have occured a long time before the start time.
+ * To compensate and get the correct results one needs to count from start time to the max value of the timer then add the stop time.
+ */
+
 void setup() {
-  // put your setup code here, to run once:
+  // Start the Serial link @ 115200 bauds
   Serial.begin(115200);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
-  unsigned long start_time = 0;
-  unsigned long stop_time = 0;
-  unsigned long elapsed_time = 0;
-  char c = 0;
+  // Declare local variables
+  unsigned long start_time = 0;   // Start time
+  unsigned long stop_time = 0;    // Stop time
+  unsigned long elapsed_time = 0; // Calculated period between start and stop
+  char c = 0;                     // Character received
 
   // Ask the user to enter something on the serial terminal
-  Serial.println("Enter something on the terminal");
+  Serial.println("Enter something on the terminal - Only one character at a time please!");
 
   // Start the timer
   start_time = micros();

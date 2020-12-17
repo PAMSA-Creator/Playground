@@ -1,3 +1,8 @@
+/*
+ * Joystick tester
+ * Works with Joystick XC4422 (Jaycar) 2-axis XY analogue joystick
+ */
+
 #include <Arduino.h>
 
 #define ANALOG_RANGE  1024

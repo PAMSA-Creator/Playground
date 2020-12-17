@@ -6,7 +6,6 @@
 
 volatile int count;
 volatile bool buttonPressed;
-volatile int pin;
 
 const int interruptPin = 7;       // Interrupt pin 7 [D7]
 const int PCICR_MASK = 0b00000100;  // PCICR mask value to enable Port d interrupts (D0 - D7]
