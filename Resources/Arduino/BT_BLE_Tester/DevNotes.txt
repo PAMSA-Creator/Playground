@@ -1,0 +1,4 @@
+!!! Note on using the HM-10 module !!!
+Currently only works with the following Android application: Arduino Bluetooth Controller (HM-10 Module)
+Need to find out how to make it work with Python on Linux/Windows.
+Possibility to use another Arduino with HM-10 module as bridge...

@@ -1,12 +1,17 @@
-//#define _USE_STRING_CLASS
-#define _USE_CHAR_POINTER
-void setup() {
-  // put your setup code here, to run once:
+/*
+ * String vs. char* comparison
+ * Compile these two examples and compare the processing time, program storage space used and dynamic memory allocation
+ */
 
+#define _USE_STRING_CLASS
+//#define _USE_CHAR_POINTER
+void setup() {
+  Serial.begin(115200);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  unsigned long start_time = micros();
 #ifdef  _USE_STRING_CLASS
   String string1;
   String string2;
@@ -61,4 +66,11 @@ void loop() {
   char* string24;
   char* string25;
 #endif
+  unsigned long stop_time = micros();
+
+  Serial.print("Elapsed time: ");
+  Serial.print(stop_time - start_time);
+  Serial.println("us");
+  delay(100);
+  exit(0);
 }
