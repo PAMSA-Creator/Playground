@@ -1,12 +1,17 @@
+//#define _TEST
+
 unsigned long newTime = 0;
 unsigned long oldTime = 0;
 unsigned long elapsedTime = 0;
 unsigned int rpm = 0;
 const unsigned int pulsesPerTurn = 20;
-const int outputPin = 9;
 const int interruptPin = 2;
 const int interruptNumber = digitalPinToInterrupt(interruptPin);
 volatile unsigned int pulses = 0;
+
+#if defined(_TEST)
+const int outputPin = 9;
+#endif
 
 void count(void){
   // Increment the pulse counter
@@ -20,9 +25,11 @@ void setup() {
   // Define the interrupt pin as an input
   pinMode(interruptPin, INPUT);
 
+#if defined(_TEST)
   // Output a square wave signal on outputPin using the PWM functionality
   pinMode(outputPin, OUTPUT);
   analogWrite(outputPin, 127);
+#endif
 
   // Attach the ISR, the count() function
   // Act on the falling edge of the interruptPin
