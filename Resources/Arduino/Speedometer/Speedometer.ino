@@ -11,7 +11,9 @@ const int interruptNumber = digitalPinToInterrupt(interruptPin);
 volatile unsigned int pulses = 0;
 
 #if defined(_TEST)
-const int outputPin = 6;
+// Uno, Nano, Mini 3, 5, 6, 9, 10, 11  490 Hz (pins 5 and 6: 980 Hz)
+const int lowFrequencyPin = 3;
+const int highFrequencyPin = 6;
 #endif
 
 /*
@@ -106,9 +108,11 @@ void setup() {
   pinMode(interruptPin, INPUT);
 
 #if defined(_TEST)
-  // Output a square wave signal on outputPin using the PWM functionality
-  pinMode(outputPin, OUTPUT);
-  analogWrite(outputPin, 127);
+  // Output a square wave signal on lowFrequencyPin and HighFrequencyPin using the PWM functionality
+  pinMode(lowFrequencyPin, OUTPUT);
+  pinMode(highFrequencyPin, OUTPUT);
+  analogWrite(lowFrequencyPin, 127);
+  analogWrite(highFrequencyPin, 127);
 #endif
 
 #if (1 ==METHOD)
