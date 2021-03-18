@@ -2,7 +2,8 @@
  * Reference: https://thewanderingengineer.com/2014/08/11/arduino-pin-change-interrupts/
  */
 
-#include <avr/sleep.h>
+#include <avr/sleep.h> //power management and sleep modes of the AVR
+//Use of the SLEEP instruction can allow an application to reduce its power comsumption considerably.
 
 volatile int count;
 volatile bool buttonPressed;
@@ -73,10 +74,10 @@ void loop() {
  * Enables the relevant interrupts only
  */
 void enableInterrupts() {
-  cli();
+  cli(); //turn interrupts off while we're messing with them
   PCICR |= PCICR_MASK;    // Enables selected port interrupts
   PCMSK2 |= PCINT_MASK;   // Enables selected pins
-  sei();
+  sei(); //turns interrupts back on
 }
 
 /*
