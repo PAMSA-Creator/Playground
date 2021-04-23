@@ -1,0 +1,6 @@
+{
+    "board": "arduino:avr:uno",
+    "programmer": "arduino:avrisp",
+    "port": "COM7",
+    "sketch": "Square_Wave_Generator\\Square_Wave_Generator.ino"
+}
