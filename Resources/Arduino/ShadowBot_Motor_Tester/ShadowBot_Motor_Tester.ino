@@ -33,7 +33,7 @@ void setup() {
   // Wait until configured correctly
   while(!Serial);
 
-  // Seet motor speeds
+  // Set motor speeds
   motorFL.setSpeed(maxSpeed);
   motorFR.setSpeed(maxSpeed);
   motorBR.setSpeed(maxSpeed);
