@@ -8,7 +8,7 @@ double period = 0.0;
 double frequency = 0.0;
 unsigned int rpm = 0;
 const unsigned int pulsesPerTurn = 20;
-const int interruptPin = 3;
+const int interruptPin = 2;
 const int interruptNumber = digitalPinToInterrupt(interruptPin);
 volatile unsigned int pulses = 0;
 volatile unsigned long ISRTime = 0;
@@ -38,6 +38,7 @@ void count(void){
     ISRTime = micros();
     pulses++;
     isReady = (2 > pulses) ? false : true;
+    EIFR &= ~(1 << INTF0); //Clear interrupt flag
 #endif
 }
 
@@ -137,7 +138,7 @@ void method3(){
   // Get the time (in microseconds) between the last two interrupts
   elapsedTime = ISRTime - previousISRTime;
   if(12 >= elapsedTime){
-    //Serial.println("Time ERROR");
+    Serial.println("Time ERROR");
   }
   else{
     // Convert elapsedTime from microseconds to seconds
